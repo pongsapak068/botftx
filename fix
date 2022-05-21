@@ -1,0 +1,27 @@
+def my_order():
+    my_order = ftx.fetch_my_trades(pair)[-1]['price']
+    return my_order
+
+
+def asset_value():
+    Asset_value = my_order()*asset
+    x = Asset_value*hedgratio
+    return x 
+print(asset_value())
+
+def asset_sell():
+    price_sell = my_order()+0.6
+    asset_value1 = price_sell*asset
+    x_sell = float("{0:.3f}".format((asset_value1*hedgratio-asset_value())/price_sell))
+    return x_sell,price_sell
+
+def asset_buy():
+    price_buy = my_order()-0.6
+    asset_value2 = price_buy*asset
+    x_buy = float("{0:.3f}".format((asset_value()-asset_value2*hedgratio)/price_buy))
+    return x_buy,price_buy
+
+def get_count():
+    open_order = ftx.fetch_open_orders(pair)
+    count_order = len(open_order)
+    return count_order
